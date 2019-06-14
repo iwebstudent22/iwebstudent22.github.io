@@ -1,0 +1,21 @@
+<style>
+        body {
+            background: lightgreen;
+            font-family: sans-serif;
+            display: grid;
+            align-content: center;
+            min-height: 100vh;
+            text-align: center;
+            background-image: linear-gradient(lightblue, lightgreen);
+        }
+
+        h1 {
+            font-size: 48px;
+            text-transform: uppercase;
+            margin: 10;
+        }
+
+        p {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+    </style>
