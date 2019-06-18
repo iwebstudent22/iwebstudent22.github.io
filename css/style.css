@@ -1,29 +1,107 @@
+* { box-sizing: border-box; }
+
 body {
-    background: lightgreen;
+    margin: 0;
+    padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: lightgreen;
+}
+
+header {
+    background: black;
+    color: white;
+    padding: 1em 2em;
+}
+
+header a {
+    color: white;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.site-id h1 {
+    margin: 0;
+}
+
+nav ul {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    padding-top: .6em;
+}
+
+nav li {
+    margin: 0;
+    list-style: none;
+}
+
+nav a {
+    display: block;
+    padding: 1em;
+}
+
+footer {
+    border-top: 1px solid #ddd;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+footer nav ul {
+    justify-content: center;
+}
+
+main {
+    padding: 0 0 3em 0;
+    min-height: 80vh;
+    
+}
+
+section {
+    padding: 3em 1em;
+}
+
+.hero {
     display: grid;
     align-content: center;
-    min-height: 100vh;
     text-align: center;
     background-image: linear-gradient(lightblue, lightgreen);
+    min-height: 50vh;
+    color: white;
 }
 
-h1 {
-    font-size: 48px;
+.hero h2 {
+    font-size: 5em;
     text-transform: uppercase;
-    margin: 10;
+    margin: 0 auto;
 }
 
-p {
-    color: darkslategrey;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+.hero p {
+    max-width: 600px;
+    margin: 1em auto;
 }
 
-ul {
-    color: teal;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.lists {
+    background-image: linear-gradient(lightgreen, white);
+}
+
+.lists .container {
+    max-width: 1000px;
+    margin: 0 auto;
     display: grid;
-    align-content: left;
-    min-height: 10vh;
-    text-align: left;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 1em;
+}
+
+@media (max-width:767px) {
+    .lists .container {
+        grid-template-columns: 1fr 1fr;
+    }
 }
