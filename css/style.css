@@ -105,3 +105,40 @@ section {
         grid-template-columns: 1fr 1fr;
     }
 }
+
+.page-sub .hero {
+    min-height: 30vh;
+    background-image: linear-gradient(lightyellow, pink);
+}
+
+.blog-archives {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.blog-entry {
+    border: 1px solid #ddd;
+    padding: 2em;
+    margin: 2em 0;
+}
+
+.date {
+    opacity: .5;
+    font-size: .8em;
+}
+
+.page-sub.page-blog .lists {
+    background: white;
+}
+
+.page-sub.page-about .lists {
+    background-image: linear-gradient(pink, white);
+}
+
+.page-sub.page-about footer a {
+    color: pink;
+}
+
+.page-sub.page-blog footer a {
+    color: black;
+}
