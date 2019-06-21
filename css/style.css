@@ -8,17 +8,16 @@ body {
 
 a {
     text-decoration: none;
-    color: lightgreen;
+    color: rgb(112, 146, 173);;
 }
 
 header {
-    background: black;
-    color: white;
+    background: white;
     padding: 1em 2em;
 }
 
 header a {
-    color: white;
+    color: rgb(112, 146, 173);
 }
 
 header {
@@ -72,7 +71,9 @@ section {
     display: grid;
     align-content: center;
     text-align: center;
-    background-image: linear-gradient(lightblue, lightgreen);
+    background-image: url('https://picsum.photos/id/1015/1800/500/?blur');
+    background-position: left top;
+    background-size: cover;
     min-height: 50vh;
     color: white;
 }
@@ -89,7 +90,7 @@ section {
 }
 
 .lists {
-    background-image: linear-gradient(lightgreen, white);
+    background-image: linear-gradient(white);
 }
 
 .lists .container {
@@ -140,7 +141,7 @@ section {
 }
 
 .page-sub.page-blog footer a {
-    color: rgb(172, 71, 118);
+    color: pink;
 }
 
 .page-sub.page-about .lists a {
@@ -149,4 +150,65 @@ section {
 
 .page-sub.page-blog .blog-archives a {
     color: pink;
+}
+
+.page-sub.page-blog header a {
+    color: pink;
+}
+
+.page-sub.page-about header a {
+    color: pink;
+}
+
+/* SLIDESHOW */
+
+#slideshow img {
+    width: 700px;
+    height: 300px;
+    transition: .3s ease-in-out;
+}
+
+#slideshow img:hover {
+    opacity: 0.5;
+}
+
+#a1, #a2, #a3, #a4 {
+    width: 700px;
+    height: 300px;
+    float: left;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#slideshow-container {
+    width: 700px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    margin: auto;
+    margin-top: 30px;
+    border-radius: 10px;
+}
+
+#slideshow {
+    width: 1000%;
+    animation: slideshow 20s infinite;
+}
+
+
+@keyframes slideshow {
+    0%, 10%, 100% {margin-left: 0;}
+    20%, 30% {margin-left: -700px;}
+    40%, 50% {margin-left: -1400px;}
+    60%, 70% {margin-left: -2100px;}
+    80% {margin-left: 0;}
+}
+
+.slideshow-header {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    max-height: 10vh;
+    margin: 1em;
+    text-transform: uppercase;
 }
