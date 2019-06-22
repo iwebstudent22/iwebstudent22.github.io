@@ -8,7 +8,7 @@ body {
 
 a {
     text-decoration: none;
-    color: rgb(112, 146, 173);;
+    color: rgb(112, 146, 173);
 }
 
 header {
@@ -25,6 +25,11 @@ header {
     grid-template-columns: 1fr 1fr;
     align-items: center;
     font-family: 'Comfortaa';
+}
+
+.logo {
+    background-size: cover;
+    background-position: center;
 }
 
 .site-id h1 {
