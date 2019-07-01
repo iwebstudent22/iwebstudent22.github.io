@@ -84,6 +84,7 @@ section {
     min-height: 50vh;
     color: white;
     font-family: 'Comfortaa';
+    padding: 10;
 }
 
 .hero h2 {
