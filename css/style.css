@@ -221,3 +221,13 @@ section {
     margin: 1em;
     text-transform: uppercase;
 }
+
+.ui-designs {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.ui-designs img {
+    width: 20%;
+    height: auto;
+}
