@@ -165,6 +165,10 @@ section {
     color: pink;
 }
 
+.page-sub.page-blog main {
+    padding-bottom: 70vh;
+}
+
 .page-sub.page-about header a {
     color: pink;
 }
@@ -230,4 +234,36 @@ section {
 .ui-designs img {
     width: 20%;
     height: auto;
+}
+
+.dropbtn {
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: gray;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }

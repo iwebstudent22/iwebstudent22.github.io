@@ -24,7 +24,7 @@
         }
 
         button {
-            background-color: green;
+            background-color: lightgreen;
             color: white;
             border: none;
             bottom: 0;
@@ -36,11 +36,13 @@
         }
 
         button:hover {
-            background-color: orange;
+            background-color: lightyellow;
+            color: black;
         }
 
         button:disabled {
             background-color: grey;
+            color: white;
         }
 
         .game {
@@ -53,7 +55,7 @@
         }
 
         header a {
-            color: green
+            color: lightgreen
         }
 
         header {
@@ -65,7 +67,7 @@
 
         a {
             text-decoration: none;
-            color: green
+            color: lightgreen
         }
 
         .site-id h1 {
@@ -88,6 +90,56 @@
             display: block;
             padding: 1em;
         }
+
+        .dropbtn {
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: gray;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .hero {
+            display: grid;
+            align-content: center;
+            text-align: center;
+            background-image: linear-gradient(lightyellow, lightgreen);
+            background-position: left top;
+            background-size: cover;
+            min-height: 50vh;
+            color: white;
+            font-family: 'Comfortaa';
+            padding: 10;
+            font-size: 5em;
+        }
+
+        canvas {
+            margin: 10px;
+        }
     </style>
 
 </head>
@@ -102,11 +154,22 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <div class="dropdown">
+                    <li class="dropbtn"><a href="blog.html">Blog</a></li>
+                    <div class="dropdown-content">
+                        <a href="blog.html#week1">Week 1</a>
+                        <a href="blog.html#week2">Week 2</a>
+                        <a href="blog.html#week3">Week 3</a>
+                        <a href="blog.html#week4">Week 4</a>
+                    </div>
+                </div>
                 <li><a href="snake.html">Game</a></li>
             </ul>
         </nav>
     </header>
+    <section class="hero">
+        <h2>Game</h2>
+    </section>
     <div class="game">
         <div id="home">
             <canvas id="mycanvas" width="500" height="350">
@@ -130,15 +193,15 @@
 
         var drawModule = (function () {
             var bodySnake = function (x, y) {
-                ctx.fillStyle = "green";
+                ctx.fillStyle = "lightgreen";
                 ctx.fillRect(x * snakeSize, y * snakeSize, snakeSize, snakeSize);
-                ctx.strokeStyle = "darkgreen";
+                ctx.strokeStyle = "green";
                 ctx.strokeRect(x * snakeSize, y * snakeSize, snakeSize, snakeSize);
             }
             var pizza = function (x, y) {
-                ctx.fillStyle = "yellow";
+                ctx.fillStyle = "lightyellow";
                 ctx.fillRect(x * snakeSize, y * snakeSize, snakeSize, snakeSize);
-                ctx.strokeStyle = "red";
+                ctx.strokeStyle = "yellow";
                 ctx.strokeRect(x * snakeSize + 1, y * snakeSize + 1, snakeSize - 2, snakeSize - 2);
             }
             var scoreText = function () {
