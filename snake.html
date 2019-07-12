@@ -13,7 +13,10 @@
             padding: 0;
             align-items: center;
             align-content: center;
+            text-align: center;
             display: grid;
+            font-family: 'Comfortaa';
+            animation: fadeinDown 2s;
         }
 
         #home {
@@ -31,8 +34,10 @@
             height: 30px;
             font-size: 12pt;
             float: left;
-            width: 90px;
+            width: 110px;
             margin: 10px;
+            display: grid;
+            text-align: center;
         }
 
         button:hover {
@@ -132,19 +137,38 @@
             background-size: cover;
             min-height: 50vh;
             color: white;
-            font-family: 'Comfortaa';
             padding: 10;
             font-size: 5em;
         }
 
         canvas {
             margin: 10px;
+            background-color: gray;
+            border: 1px solid darkgray;
+            justify-content: center;
+        }
+
+        .scroll {
+            top: 100vh;
+            font-size: 10vh;
+        }
+
+        @keyframes fadeinDown {
+            from {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 
 </head>
 
-<body>
+<body onload="startGame()">
     <header>
         <div class="site-id">
             <h1><a href="index.html"><img src="img/logo.png" class="logo" alt="CG"
@@ -168,168 +192,296 @@
         </nav>
     </header>
     <section class="hero">
-        <h2>Game</h2>
+        <h2>Games</h2>
     </section>
+    <a href="snake.html#home" class="scroll">↓</a>
     <div class="game">
         <div id="home">
             <canvas id="mycanvas" width="500" height="350">
             </canvas>
         </div>
-        <button id="btn">START</button>
     </div>
-    <script>
+    <section>
+        <h2>Snake</h2>
+        <button id="btn">START</button>
+        <script>
 
 
-        var mycanvas = document.getElementById("mycanvas");
-        var ctx = mycanvas.getContext("2d");
-        var snakeSize = 10;
-        var w = 500;
-        var h = 350;
-        var score = 0;
-        var snake;
-        var snakeSize = 10;
-        var food;
+            var mycanvas = document.getElementById("mycanvas");
+            document.body.insertBefore(mycanvas, document.body.childNodes[9]);
+            var ctx = mycanvas.getContext("2d");
+            var snakeSize = 10;
+            var w = 500;
+            var h = 350;
+            var score = 0;
+            var snake;
+            var snakeSize = 10;
+            var food;
 
 
-        var drawModule = (function () {
-            var bodySnake = function (x, y) {
-                ctx.fillStyle = "lightgreen";
-                ctx.fillRect(x * snakeSize, y * snakeSize, snakeSize, snakeSize);
-                ctx.strokeStyle = "green";
-                ctx.strokeRect(x * snakeSize, y * snakeSize, snakeSize, snakeSize);
-            }
-            var pizza = function (x, y) {
-                ctx.fillStyle = "lightyellow";
-                ctx.fillRect(x * snakeSize, y * snakeSize, snakeSize, snakeSize);
-                ctx.strokeStyle = "yellow";
-                ctx.strokeRect(x * snakeSize + 1, y * snakeSize + 1, snakeSize - 2, snakeSize - 2);
-            }
-            var scoreText = function () {
-                var score_text = "Score: " + score;
-                ctx.fillStyle = "blue";
-                ctx.fillText(score_text, 145, h - 5);
-            }
-            var drawSnake = function () {
-                var length = 4;
-                snake = [];
-                for (var i = length; i >= 0; i--) {
-                    snake.push({ x: 1, y: 0 })
+            var drawModule = (function () {
+                var bodySnake = function (x, y) {
+                    ctx.fillStyle = "lightgreen";
+                    ctx.fillRect(x * snakeSize, y * snakeSize, snakeSize, snakeSize);
+                    ctx.strokeStyle = "green";
+                    ctx.strokeRect(x * snakeSize, y * snakeSize, snakeSize, snakeSize);
                 }
-            }
-            var createFood = function () {
-                food = {
-                    x: Math.floor((Math.random() * 30) + 1),
-                    y: Math.floor((Math.random() * 30) + 1)
+                var pizza = function (x, y) {
+                    ctx.fillStyle = "lightyellow";
+                    ctx.fillRect(x * snakeSize, y * snakeSize, snakeSize, snakeSize);
+                    ctx.strokeStyle = "yellow";
+                    ctx.strokeRect(x * snakeSize + 1, y * snakeSize + 1, snakeSize - 2, snakeSize - 2);
                 }
-                for (var i = 0; i > snake.length; i++) {
-                    var snakeX = snake[i].x;
-                    var snakeY = snake[i].y;
-                    if (food.x === snakeX || food.y === snakeY || food.y === snakeY && food.x === snakeX) {
-                        food.x = Math.floor((Math.random() * 30) + 1);
-                        food.y = Math.floor((Math.random() * 30) + 1);
+                var scoreText = function () {
+                    var score_text = "Score: " + score;
+                    ctx.fillStyle = "blue";
+                    ctx.fillText(score_text, 145, h - 5);
+                }
+                var drawSnake = function () {
+                    var length = 4;
+                    snake = [];
+                    for (var i = length; i >= 0; i--) {
+                        snake.push({ x: 1, y: 0 })
                     }
                 }
-            }
-            var checkCollision = function (x, y, array) {
-                for (var i = 0; i < array.length; i++) {
-                    if (array[i].x === x && array[i].y === y) {
-                        return true;
+                var createFood = function () {
+                    food = {
+                        x: Math.floor((Math.random() * 30) + 1),
+                        y: Math.floor((Math.random() * 30) + 1)
                     }
+                    for (var i = 0; i > snake.length; i++) {
+                        var snakeX = snake[i].x;
+                        var snakeY = snake[i].y;
+                        if (food.x === snakeX || food.y === snakeY || food.y === snakeY && food.x === snakeX) {
+                            food.x = Math.floor((Math.random() * 30) + 1);
+                            food.y = Math.floor((Math.random() * 30) + 1);
+                        }
+                    }
+                }
+                var checkCollision = function (x, y, array) {
+                    for (var i = 0; i < array.length; i++) {
+                        if (array[i].x === x && array[i].y === y) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                var paint = function () {
+                    ctx.fillStyle = "lightgrey";
+                    ctx.fillRect(0, 0, w, h);
+                    ctx.strokeStyle = "black";
+                    ctx.strokeRect(0, 0, w, h);
+                    btn.setAttribute("disabled", true);
+                    var snakeX = snake[0].x;
+                    var snakeY = snake[0].y;
+                    if (direction == "right") {
+                        snakeX++;
+                    } else if (direction == "left") {
+                        snakeX--;
+                    } else if (direction == "up") {
+                        snakeY--;
+                    } else if (direction == "down") {
+                        snakeY++;
+                    }
+                    if (snakeX == -1 || snakeX == w / snakeSize || snakeY == -1 || snakeY == h / snakeSize || checkCollision(snakeX, snakeY, snake)) {
+                        btn.removeAttribute("disabled", true);
+                        ctx.clearRect(0, 0, w, h);
+                        gameloop = clearInterval(gameloop);
+                        return;
+                    }
+                    if (snakeX == food.x && snakeY == food.y) {
+                        var tail = {
+                            x: snakeX,
+                            y: snakeY
+                        };
+                        score++;
+                        createFood();
+                    } else {
+                        var tail = snake.pop();
+                        tail.x = snakeX;
+                        tail.y = snakeY;
+                    }
+                    snake.unshift(tail);
+                    for (var i = 0; i < snake.length; i++) {
+                        bodySnake(snake[i].x, snake[i].y);
+                    }
+                    pizza(food.x, food.y);
+                    scoreText();
+                }
+                var init = function () {
+                    direction = "down";
+                    drawSnake();
+                    createFood();
+                    gameloop = setInterval(paint, 80);
+                }
+                return {
+                    init: init
+                };
+            }());
+
+            (function (window, document, drawModule, undefined) {
+                var btn = document.getElementById("btn");
+                btn.addEventListener("click", function () {
+                    console.log("Clicked button!");
+                    drawModule.init();
+                });
+                document.onkeydown = function (event) {
+                    keyCode = window.event.keyCode;
+                    keyCode = event.keyCode;
+                    switch (keyCode) {
+                        case 37:
+                            if (direction != "right") {
+                                direction = "left";
+                                console.log("left");
+                            }
+                            break;
+                        case 39:
+                            if (direction != "left") {
+                                direction = "right";
+                                console.log("right");
+                            }
+                            break;
+                        case 38:
+                            if (direction != "down") {
+                                direction = "up";
+                                console.log("up");
+                            }
+                            break;
+                        case 40:
+                            if (direction != "up") {
+                                direction = "down";
+                                console.log("down");
+                            }
+                            break;
+                    }
+                }
+            })(window, document, drawModule)
+        </script>
+    </section>
+
+    <section>
+        <h2>Flappy Bird</h2>
+        <script>
+            var myGamePiece;
+            var myObstacles = [];
+            var myScore;
+
+            function startGame() {
+                myGamePiece = new component(30, 30, "red", 10, 120);
+                myGamePiece.gravity = 0.05;
+                myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+                myGameArea.start();
+            }
+
+            var myGameArea = {
+                canvas: document.createElement("canvas"),
+                start: function () {
+                    this.canvas.width = 480;
+                    this.canvas.height = 270;
+                    this.context = this.canvas.getContext("2d");
+                    document.body.insertBefore(this.canvas, document.body.childNodes[11]);
+                    this.frameNo = 0;
+                    this.interval = setInterval(updateGameArea, 20);
+                },
+                clear: function () {
+                    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                }
+            }
+            function component(width, height, color, x, y, type) {
+                this.type = type;
+                this.score = 0;
+                this.width = width;
+                this.height = height;
+                this.speedX = 0;
+                this.speedY = 0;
+                this.x = x;
+                this.y = y;
+                this.gravity = 0;
+                this.gravitySpeed = 0;
+                this.update = function () {
+                    ctx = myGameArea.context;
+                    if (this.type == "text") {
+                        ctx.font = this.width + " " + this.height;
+                        ctx.fillStyle = color;
+                        ctx.fillText(this.text, this.x, this.y);
+                    } else {
+                        ctx.fillStyle = color;
+                        ctx.fillRect(this.x, this.y, this.width, this.height);
+                    }
+                }
+                this.newPos = function () {
+                    this.gravitySpeed += this.gravity;
+                    this.x += this.speedX;
+                    this.y += this.speedY + this.gravitySpeed;
+                    this.hitBottom();
+                }
+                this.hitBottom = function () {
+                    var rockbottom = myGameArea.canvas.height - this.height;
+                    if (this.y > rockbottom) {
+                        this.y = rockbottom;
+                        this.gravitySpeed = 0;
+                    }
+                }
+                this.crashWith = function (otherobj) {
+                    var myleft = this.x;
+                    var myright = this.x + (this.width);
+                    var mytop = this.y;
+                    var mybottom = this.y + (this.height);
+                    var otherleft = otherobj.x;
+                    var otherright = otherobj.x + (otherobj.width);
+                    var othertop = otherobj.y;
+                    var otherbottom = otherobj.y + (otherobj.height);
+                    var crash = true;
+                    if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+                        crash = false;
+                    }
+                    return crash;
+                }
+            }
+
+            function updateGameArea() {
+                var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+                for (i = 0; i < myObstacles.length; i += 1) {
+                    if (myGamePiece.crashWith(myObstacles[i])) {
+                        return;
+                    }
+                }
+                myGameArea.clear();
+                myGameArea.frameNo += 1;
+                if (myGameArea.frameNo == 1 || everyinterval(150)) {
+                    x = myGameArea.canvas.width;
+                    minHeight = 20;
+                    maxHeight = 200;
+                    height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
+                    minGap = 50;
+                    maxGap = 200;
+                    gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+                    myObstacles.push(new component(10, height, "green", x, 0));
+                    myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
+                }
+                for (i = 0; i < myObstacles.length; i += 1) {
+                    myObstacles[i].x += -1;
+                    myObstacles[i].update();
+                }
+                myScore.text = "SCORE: " + myGameArea.frameNo;
+                myScore.update();
+                myGamePiece.newPos();
+                myGamePiece.update();
+            }
+            function everyinterval(n) {
+                if ((myGameArea.frameNo / n) % 1 == 0) {
+                    return true;
                 }
                 return false;
             }
-            var paint = function () {
-                ctx.fillStyle = "lightgrey";
-                ctx.fillRect(0, 0, w, h);
-                ctx.strokeStyle = "black";
-                ctx.strokeRect(0, 0, w, h);
-                btn.setAttribute("disabled", true);
-                var snakeX = snake[0].x;
-                var snakeY = snake[0].y;
-                if (direction == "right") {
-                    snakeX++;
-                } else if (direction == "left") {
-                    snakeX--;
-                } else if (direction == "up") {
-                    snakeY--;
-                } else if (direction == "down") {
-                    snakeY++;
-                }
-                if (snakeX == -1 || snakeX == w / snakeSize || snakeY == -1 || snakeY == h / snakeSize || checkCollision(snakeX, snakeY, snake)) {
-                    btn.removeAttribute("disabled", true);
-                    ctx.clearRect(0, 0, w, h);
-                    gameloop = clearInterval(gameloop);
-                    return;
-                }
-                if (snakeX == food.x && snakeY == food.y) {
-                    var tail = {
-                        x: snakeX,
-                        y: snakeY
-                    };
-                    score++;
-                    createFood();
-                } else {
-                    var tail = snake.pop();
-                    tail.x = snakeX;
-                    tail.y = snakeY;
-                }
-                snake.unshift(tail);
-                for (var i = 0; i < snake.length; i++) {
-                    bodySnake(snake[i].x, snake[i].y);
-                }
-                pizza(food.x, food.y);
-                scoreText();
+            function accelerate(n) {
+                myGamePiece.gravity = n;
             }
-            var init = function () {
-                direction = "down";
-                drawSnake();
-                createFood();
-                gameloop = setInterval(paint, 80);
-            }
-            return {
-                init: init
-            };
-        }());
-
-        (function (window, document, drawModule, undefined) {
-            var btn = document.getElementById("btn");
-            btn.addEventListener("click", function () {
-                console.log("Clicked button!");
-                drawModule.init();
-            });
-            document.onkeydown = function (event) {
-                keyCode = window.event.keyCode;
-                keyCode = event.keyCode;
-                switch (keyCode) {
-                    case 37:
-                        if (direction != "right") {
-                            direction = "left";
-                            console.log("left");
-                        }
-                        break;
-                    case 39:
-                        if (direction != "left") {
-                            direction = "right";
-                            console.log("right");
-                        }
-                        break;
-                    case 38:
-                        if (direction != "down") {
-                            direction = "up";
-                            console.log("up");
-                        }
-                        break;
-                    case 40:
-                        if (direction != "up") {
-                            direction = "down";
-                            console.log("down");
-                        }
-                        break;
-                }
-            }
-        })(window, document, drawModule)
-    </script>
-
+        </script>
+        <div id="flappybird"></div>
+        <br>
+        <button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
+    </section>
 </body>
 
 </html>
