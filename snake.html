@@ -139,6 +139,7 @@
             color: white;
             padding: 10;
             font-size: 5em;
+            animation: fadeinDown 2s;
         }
 
         canvas {
@@ -146,17 +147,31 @@
             background-color: gray;
             border: 1px solid darkgray;
             justify-content: center;
+            animation: fadeinUp 2s;
         }
 
         .scroll {
             top: 100vh;
             font-size: 10vh;
+            animation: fadeinUp 2s;
         }
 
         @keyframes fadeinDown {
             from {
                 opacity: 0;
                 transform: translateY(-100%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeinUp {
+            from {
+                opacity: 0;
+                transform: translateY(100%);
             }
 
             to {
