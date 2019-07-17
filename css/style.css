@@ -330,3 +330,30 @@ section {
         opacity: 0.5;
     }
 }
+
+input {
+    width: 20px;
+    color: transparent;
+    cursor: pointer;
+    margin: 15px;
+    background-color: black;
+}
+
+input:hover {
+    background-color: lightgray;
+}
+
+input:focus {
+    width: 130px;
+    color: darkgray;
+    background-color: gray;
+    cursor: auto;
+}
+
+input:placeholder {
+    color: transparent;
+}
+
+input::input-placeholder {
+    color:transparent;
+}
