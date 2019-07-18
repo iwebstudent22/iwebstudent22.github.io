@@ -344,6 +344,7 @@ input:hover {
 }
 
 input:focus {
+    animation: inputAnimation 1s;
     width: 130px;
     color: darkgray;
     background-color: gray;
@@ -356,4 +357,34 @@ input:placeholder {
 
 input::input-placeholder {
     color:transparent;
+}
+
+@keyframes inputAnimation {
+    from {
+        width: 20px;
+    }
+
+    to {
+        width: 130px;
+    }
+}
+
+
+.page-home h3:before {
+    content: "";
+    opacity: 0;
+    transition: 2s ease all;
+    display: inline-block;
+    max-width: 0;
+}
+
+.page-home h3:hover:before {
+    content: "Favorite ";
+    opacity: 1;
+    max-width: 300px;
+}
+
+.hero h2:hover:before {
+    content: "Welcome To ";
+    transition: 2s ease all;
 }
